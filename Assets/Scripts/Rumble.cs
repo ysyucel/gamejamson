@@ -6,10 +6,10 @@ public class Rumble : MonoBehaviour
 {
 
     public Ease rumbleEase = Ease.InOutCirc;
-    public float rumbleTime = 0.5f;
-    public float maxAngle = 5;
-    public float deceleration = 1.02f;
-    public Vector2 limitAngle = new Vector2 (0.1f, 1);
+    public float durationMultiplier = 1.02f;
+    public float rumbleSideDuration = 0.1f;
+    public Vector2 maxRumbleAngle = new Vector2 (3,5);
+    public Vector2 minRumbleAngle = new Vector2 (0.1f, 1);
     public Vector2 waitDurations = new Vector2(0.3f, 2f);
 
 
@@ -23,14 +23,14 @@ public class Rumble : MonoBehaviour
     {
         DOTween.Kill("Angle");
         yield return null;
-        float targetAngle = maxAngle;
+        float targetAngle = Random.Range(maxRumbleAngle.x, maxRumbleAngle.y);
         float currentAngle = 0;
-        float limit = Random.Range(limitAngle.x, limitAngle.y);
+        float limit = Random.Range(minRumbleAngle.x, minRumbleAngle.y);
         while(true)
         {
-            yield return DOVirtual.Float(currentAngle, targetAngle, rumbleTime, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
+            yield return DOVirtual.Float(currentAngle, targetAngle, rumbleSideDuration, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
             currentAngle = targetAngle;
-            targetAngle /= -deceleration;
+            targetAngle /= -durationMultiplier;
 
 
             if (Mathf.Abs(targetAngle) <= limit)
