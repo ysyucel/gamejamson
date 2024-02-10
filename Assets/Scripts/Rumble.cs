@@ -10,7 +10,7 @@ public class Rumble : MonoBehaviour
     public float lastVelocity = 1;
     public Ease rumbleEase = Ease.InOutCirc;
     public float rumbleTime = 0.5f;
-    public float rumbleTimeCheck = 0.5f;
+   // public float rumbleTimeCheck = 0.5f;
     public float angleMultiplier = 1;
     public float deceleration = 1.1f;
 
@@ -18,7 +18,7 @@ public class Rumble : MonoBehaviour
     public void Start()
     {
         StartCoroutine(nameof(RumbleRoutine));
-        rumbleTimeCheck = rumbleTime;
+       // rumbleTimeCheck = rumbleTime;
     }
 
     IEnumerator RumbleRoutine()
@@ -27,17 +27,17 @@ public class Rumble : MonoBehaviour
         yield return null;
         float targetAngle = lastVelocity * angleMultiplier;
         float currentAngle = 0;
-        while(rumbleTimeCheck<0f)
+        while(true)//(rumbleTimeCheck<0f)
         {
             yield return DOVirtual.Float(currentAngle, targetAngle, rumbleTime, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-            rumbleTimeCheck -= Time.deltaTime;
+           // rumbleTimeCheck -= Time.deltaTime;
             currentAngle = targetAngle;
             targetAngle /= -deceleration;
         }
 
-        yield return new WaitForSeconds(2);
-        rumbleTimeCheck = rumbleTime;
-        StartCoroutine(nameof(RumbleRoutine));
+        // yield return new WaitForSeconds(2);
+        // rumbleTimeCheck = rumbleTime;
+        // StartCoroutine(nameof(RumbleRoutine));
 
 
 

@@ -9,7 +9,8 @@ public class Hold : MonoBehaviour
     private XRSimpleInteractable grabInteractable;
     private float initialScale;
     private float maxScale = 3.0f; 
-    public float growthRate = 0.01f;
+    public float pushRate = 0.01f;
+    public float growRate = 0.5f;
     public Camera cam;
 
     private void Start()
@@ -21,6 +22,7 @@ public class Hold : MonoBehaviour
 
     private void Update()
     {
+        
         if (grabInteractable.isSelected)
         {
             //ScaleObject();
@@ -32,7 +34,7 @@ public class Hold : MonoBehaviour
     {
         if (transform.localScale.x < maxScale)
         {
-            float newScale = transform.localScale.x + growthRate * Time.deltaTime;
+            float newScale = transform.localScale.x + growRate * Time.deltaTime;
             transform.localScale = new Vector3(newScale, newScale, newScale);
         }
     }
@@ -40,6 +42,6 @@ public class Hold : MonoBehaviour
     private void PushObject()
     {
         Vector3 direction = (cam.transform.position - transform.position).normalized;
-        transform.position += -direction * growthRate;
+        transform.position += -direction * pushRate;
     }
 }
