@@ -151,10 +151,16 @@ public class Rumble : MonoBehaviour
         transform.localEulerAngles = new Vector3(angle, 0, 0);
     }
 
+    float randomAxis;
+
     void UpdatePos(float pos)
     {
-        //transform.position = new Vector3(pos, transform.position.y, transform.position.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y,pos);
+        transform.position = new Vector3(pos, transform.position.y, transform.position.z);
+
+        do randomAxis = Random.Range(-1, 2);
+        while (randomAxis == 0);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, pos * randomAxis);
     }
 
 
