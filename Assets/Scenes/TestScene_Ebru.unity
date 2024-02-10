@@ -166,7 +166,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279369918}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -184,7 +184,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &279369921
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 1110945005}
   - component: {fileID: 1110945003}
   - component: {fileID: 1110945007}
+  - component: {fileID: 1110945008}
   m_Layer: 0
   m_Name: Bookshelf
   m_TagString: Untagged
@@ -474,9 +475,36 @@ MonoBehaviour:
   rumbleEase: 22
   durationMultiplier: 1.02
   rumbleSideDuration: 0.1
-  maxRumbleAngle: {x: 4, y: 7}
-  minRumbleAngle: {x: 0.1, y: 1}
-  waitDurations: {x: 0.3, y: 2}
+  rumbleSideDecrease: 0.005
+  maxRumbleAngle: {x: 1, y: 1.2}
+  minRumbleAngle: {x: 0.1, y: 0.5}
+--- !u!54 &1110945008
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110945002}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1115991101
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +534,7 @@ Transform:
   m_GameObject: {fileID: 1115991101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.336, y: 2.105, z: 0.43600002}
+  m_LocalPosition: {x: -0.336, y: 2.105, z: 0.195}
   m_LocalScale: {x: 0.69708, y: 1, z: 0.18739}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -520,7 +548,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115991101}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -538,7 +566,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &1115991104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -653,7 +681,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378961910}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -671,7 +699,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &1378961913
 BoxCollider:
   m_ObjectHideFlags: 0
