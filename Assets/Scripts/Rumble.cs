@@ -1,45 +1,44 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using DG.Tweening;
 
 public class Rumble : MonoBehaviour
 {
 
-    public float lastVelocity = 1;
     public Ease rumbleEase = Ease.InOutCirc;
     public float rumbleTime = 0.5f;
-   // public float rumbleTimeCheck = 0.5f;
-    public float angleMultiplier = 1;
-    public float deceleration = 1.1f;
+    public float maxAngle = 5;
+    public float deceleration = 1.02f;
+    public Vector2 limitAngle = new Vector2 (0.1f, 1);
+    public Vector2 waitDurations = new Vector2(0.3f, 2f);
+
 
 
     public void Start()
     {
         StartCoroutine(nameof(RumbleRoutine));
-       // rumbleTimeCheck = rumbleTime;
     }
 
     IEnumerator RumbleRoutine()
     {
         DOTween.Kill("Angle");
         yield return null;
-        float targetAngle = lastVelocity * angleMultiplier;
+        float targetAngle = maxAngle;
         float currentAngle = 0;
-        while(true)//(rumbleTimeCheck<0f)
+        float limit = Random.Range(limitAngle.x, limitAngle.y);
+        while(true)
         {
             yield return DOVirtual.Float(currentAngle, targetAngle, rumbleTime, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-           // rumbleTimeCheck -= Time.deltaTime;
             currentAngle = targetAngle;
             targetAngle /= -deceleration;
+
+
+            if (Mathf.Abs(targetAngle) <= limit)
+                break;
         }
 
-        // yield return new WaitForSeconds(2);
-        // rumbleTimeCheck = rumbleTime;
-        // StartCoroutine(nameof(RumbleRoutine));
-
-
+         yield return new WaitForSeconds(Random.Range(waitDurations.x, waitDurations.y));
+         StartCoroutine(nameof(RumbleRoutine));
 
     }
 
