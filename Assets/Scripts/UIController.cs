@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    public GameObject fadeInCanvas;
     public Image fadePanel;
     public float fadeDuration = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        FadeIn();
+       
     }
 
     // Update is called once per frame
@@ -35,6 +36,7 @@ public class UIController : MonoBehaviour
 
     public void FadeIn()
     {
+        fadeInCanvas.SetActive(true);
         LeanTween.value(fadePanel.gameObject, SetImageAlpha, fadePanel.color.a, 1, fadeDuration)
                  .setEase(LeanTweenType.easeInOutQuad);
     }
@@ -42,7 +44,7 @@ public class UIController : MonoBehaviour
     public void FadeOut()
     {
         LeanTween.value(fadePanel.gameObject, SetImageAlpha, fadePanel.color.a, 0, fadeDuration)
-                 .setEase(LeanTweenType.easeInOutQuad);
+                 .setEase(LeanTweenType.easeInOutQuad).setOnComplete(() => { fadeInCanvas.SetActive(false); });
     }
 
     void SetImageAlpha(float alpha)

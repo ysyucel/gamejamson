@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 106ecec9103289942bfecf5f640ec771, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -225,6 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d823ded5c8e2c5f40b3a6a67e7b481f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeInCanvas: {fileID: 0}
+  fadePanel: {fileID: 0}
+  fadeDuration: 1
 --- !u!4 &650946035
 Transform:
   m_ObjectHideFlags: 0
