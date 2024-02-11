@@ -31,8 +31,8 @@ public class Rumble : MonoBehaviour
     {
         if(isLinear)
             StartCoroutine(nameof(LinearSlowToFast));
-        else
-            StartCoroutine(nameof(SlowToFast));
+       // else
+           // StartCoroutine(nameof(SlowToFast));
     }
 
     IEnumerator LinearSlowToFast()
@@ -86,82 +86,111 @@ public class Rumble : MonoBehaviour
         }
     }
 
-    IEnumerator SlowToFast()
-    {
-        DOTween.Kill("Angle");
-        yield return null;
-        currentAngle = 0;
-        limitAngle = Random.Range(minRumbleAngle.x, minRumbleAngle.y);
-        targetAngle = limitAngle;
-        rumbleSideDuration *= 2;
+ 
 
-
-
-        while (true)
-        {
-            yield return DOVirtual.Float(currentAngle, targetAngle, rumbleSideDuration, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-            currentAngle = targetAngle;
-            //targetAngle /= -durationMultiplier;
-            targetAngle *= -durationMultiplier;
-            if(rumbleSideDuration > 0.1f)
-                rumbleSideDuration -= rumbleSideDecrease;
-
-
-            if (Mathf.Abs(targetAngle) >= maxRumbleAngle.y)
-                break;
-        }
-
-        StartCoroutine(nameof(FastToSlow));
-
-    }
-
-
-    
-
-    IEnumerator FastToSlow()
-    {
-        DOTween.Kill("Angle");
-        yield return null;
-        targetAngle = Random.Range(maxRumbleAngle.x, maxRumbleAngle.y);
-        if (currentAngle < 0)
-            targetAngle *= -1;
-        //currentAngle = 0;
-        limitAngle = Random.Range(minRumbleAngle.x, minRumbleAngle.y);
-
-
-
-        while (true)
-        {
-            yield return DOVirtual.Float(currentAngle, targetAngle, rumbleSideDuration, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-            currentAngle = targetAngle;
-            targetAngle /= -durationMultiplier;
-
-
-            //if (Mathf.Abs(targetAngle) <= limitAngle)
-            // break;
-        }
-
-        //yield return new WaitForSeconds(Random.Range(waitDurations.x, waitDurations.y));
-        //StartCoroutine(nameof(RumbleRoutine));
-
-    }
-
-    void UpdateAngle(float angle)
-    {
-        transform.localEulerAngles = new Vector3(angle, 0, 0);
-    }
-
-    float randomAxis;
+    int randomAxis;
 
     void UpdatePos(float pos)
     {
-        transform.position = new Vector3(pos, transform.position.y, transform.position.z);
+       
+        transform.position = new Vector3(pos, transform.position.y, transform.position.z); // * randomAxis);
 
-        do randomAxis = Random.Range(-1, 2);
-        while (randomAxis == 0);
+       //while(transform.position.x != pos)
+       
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, pos * randomAxis);
+        while (Mathf.Abs(transform.position.x - pos) > 0.001f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(pos, transform.position.y, transform.position.z), 0.0001f);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()), 0.0001f);
+
+        }
+
+
+        randomAxis = RandomizedAxis();
+      
+       // transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, pos * randomAxis), 0.0001f);
+        
+
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()) ;
     }
+
+    int RandomizedAxis()
+    {
+        do
+        {
+            randomAxis = Random.Range(-1, 2);
+        } while (randomAxis == 0);
+
+        return randomAxis;
+    }
+
+
+    /*IEnumerator SlowToFast()
+ {
+     DOTween.Kill("Angle");
+     yield return null;
+     currentAngle = 0;
+     limitAngle = Random.Range(minRumbleAngle.x, minRumbleAngle.y);
+     targetAngle = limitAngle;
+     rumbleSideDuration *= 2;
+
+
+
+     while (true)
+     {
+         yield return DOVirtual.Float(currentAngle, targetAngle, rumbleSideDuration, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
+         currentAngle = targetAngle;
+         //targetAngle /= -durationMultiplier;
+         targetAngle *= -durationMultiplier;
+         if(rumbleSideDuration > 0.1f)
+             rumbleSideDuration -= rumbleSideDecrease;
+
+
+         if (Mathf.Abs(targetAngle) >= maxRumbleAngle.y)
+             break;
+     }
+
+     StartCoroutine(nameof(FastToSlow));
+
+ }
+
+
+
+
+ IEnumerator FastToSlow()
+ {
+     DOTween.Kill("Angle");
+     yield return null;
+     targetAngle = Random.Range(maxRumbleAngle.x, maxRumbleAngle.y);
+     if (currentAngle < 0)
+         targetAngle *= -1;
+     //currentAngle = 0;
+     limitAngle = Random.Range(minRumbleAngle.x, minRumbleAngle.y);
+
+
+
+     while (true)
+     {
+         yield return DOVirtual.Float(currentAngle, targetAngle, rumbleSideDuration, UpdateAngle).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
+         currentAngle = targetAngle;
+         targetAngle /= -durationMultiplier;
+
+
+         //if (Mathf.Abs(targetAngle) <= limitAngle)
+         // break;
+     }
+
+     //yield return new WaitForSeconds(Random.Range(waitDurations.x, waitDurations.y));
+     //StartCoroutine(nameof(RumbleRoutine));
+
+ }
+
+ void UpdateAngle(float angle)
+ {
+     transform.localEulerAngles = new Vector3(angle, 0, 0);
+ }*/
+
 
 
 }
