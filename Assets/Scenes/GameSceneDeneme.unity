@@ -74627,6 +74627,9 @@ MonoBehaviour:
   minRumbleDuration: 0.07
   rumbleSideDuration: 0.15
   rumbleSideDecrease: 0.005
+  maxRumbleAngle: {x: 3, y: 5}
+  minRumbleAngle: {x: 0.1, y: 1}
+  waitDurations: {x: 0.3, y: 2}
   isLinear: 1
   maxRumblePos: {x: 0.06, y: 0.1}
   minRumblePos: {x: 0.01, y: 0.05}
@@ -113406,6 +113409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829218521}
   - component: {fileID: 1829218522}
+  - component: {fileID: 1829218523}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -113436,13 +113440,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829218520}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f819c89ef5eeb74f9abcf5f0383af99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxRotation: 30
   shakeDuration: 15
+--- !u!114 &1829218523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829218520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bae01715d5419e43923165680172f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rumbleEase: 22
+  accelerator: 1.02
+  minRumbleDuration: 0.5
+  rumbleSideDuration: 0.1
+  rumbleSideDecrease: 0.01
+  maxRumbleAngle: {x: 45, y: 50}
+  minRumbleAngle: {x: 0.1, y: 1}
+  waitDurations: {x: 0.3, y: 2}
+  isLinear: 0
+  maxRumblePos: {x: 0, y: 0}
+  minRumblePos: {x: 0, y: 0}
 --- !u!1 &1829805664
 GameObject:
   m_ObjectHideFlags: 0
