@@ -15,7 +15,7 @@ public class CameraShake : MonoBehaviour
     {
         // Store the camera's original position
         originalPosition = transform.localPosition;
-        Shake();
+        //Shake();
     }
 
     public void Shake()

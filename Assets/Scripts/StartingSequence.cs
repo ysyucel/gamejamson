@@ -7,7 +7,7 @@ public class StartingSequence : MonoBehaviour
     public GameObject shakeObject;
     public UIController uiController;
     public GameObject startingMessage;
-    public GameObject dustParticle;
+    public List<GameObject> dustParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +18,9 @@ public class StartingSequence : MonoBehaviour
     public void StartEarthQuake()
     {
         Debug.Log("EarthQuake");
-        shakeObject.SetActive(true);
-        dustParticle.SetActive(true);
+        shakeObject.GetComponent<CameraShake>().Shake();
+        shakeObject.GetComponent<ShakeSample>().StartEarthQuake();
+        foreach(GameObject item in dustParticle) { item.SetActive(true); }
     }
     public void CloseStartingMessage()
     {
