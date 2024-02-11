@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ceiling
   - shell
+  - finish
   layers:
   - Default
   - TransparentFX
