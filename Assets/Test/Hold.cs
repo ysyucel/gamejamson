@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using DG.Tweening;
 
 public class Hold : MonoBehaviour
 {
@@ -13,22 +14,57 @@ public class Hold : MonoBehaviour
     public float growRate = 0.5f;
     public Camera cam;
 
+    public Transform startObj;
+
+
+     Vector3 startPos;
+    Quaternion startRot;
+
+
+    Vector3 direction;
+
     private void Start()
     {
         cam = Camera.main;
+        startPos = startObj.transform.position;
+        startRot = startObj.transform.rotation;
+
         grabInteractable = GetComponent<XRSimpleInteractable>();
         initialScale = transform.localScale.x;
+
+        direction = (startPos - transform.position).normalized;
     }
 
+   
     private void Update()
     {
         
-        if (grabInteractable.isSelected)
+        /*if (grabInteractable.isSelected)
         {
             //ScaleObject();
-            PushObject();
-        }
+            //PushObject();
+        }*/
+
+        
     }
+
+
+    public float duration = 2f;
+    public void EnteredSelection()
+    {
+        transform.DOMove(startPos, duration).SetId("Push").SetSpeedBased();
+        transform.DORotateQuaternion(startRot, duration).SetId("Rotate").SetSpeedBased();
+        print("entered");
+    }
+
+    public void ExitSelection()
+    {
+        DOTween.Kill("Push");
+        DOTween.Kill("Rotate");
+        print("exited");
+    }
+
+  
 
     private void ScaleObject()
     {
@@ -41,7 +77,8 @@ public class Hold : MonoBehaviour
 
     private void PushObject()
     {
-        Vector3 direction = (cam.transform.position - transform.position).normalized;
+        //Vector3 direction = (cam.transform.position - transform.position).normalized;
+       
         transform.position += -direction * pushRate;
     }
 }
