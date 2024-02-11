@@ -15,6 +15,7 @@ public class Hold : MonoBehaviour
     public Camera cam;
 
     public Transform startObj;
+    public bool isTutorialObj = false;
 
 
      Vector3 startPos;
@@ -26,25 +27,26 @@ public class Hold : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        startObj = transform;
+        if (!isTutorialObj)
+            startObj = transform;
         startPos = startObj.transform.position;
         startRot = startObj.transform.rotation;
 
         grabInteractable = GetComponent<XRSimpleInteractable>();
         initialScale = transform.localScale.x;
 
-        direction = (startObj.transform.position - transform.position).normalized;
+        direction = (startPos - transform.position).normalized;
     }
 
    
     private void Update()
     {
         
-        if (grabInteractable.isSelected)
+        /*if (grabInteractable.isSelected)
         {
             //ScaleObject();
-            PushObject();
-        }
+            //PushObject();
+        }*/
 
         
     }
@@ -53,17 +55,18 @@ public class Hold : MonoBehaviour
     public float duration = 2f;
     public void EnteredSelection()
     {
-        // transform.DOMove(startPos, duration).SetId("Push").SetSpeedBased();
-        // transform.DORotateQuaternion(startRot, duration).SetId("Rotate").SetSpeedBased();
+        transform.DOMove(startPos, duration).SetId("Push").SetSpeedBased();
+        transform.DORotateQuaternion(startRot, duration).SetId("Rotate").SetSpeedBased();
+       
     }
 
     public void ExitSelection()
     {
-        // DOTween.Kill("Push");
-        // DOTween.Kill("Rotate");
+        DOTween.Kill("Push");
+        DOTween.Kill("Rotate");
     }
 
-
+  
 
     private void ScaleObject()
     {
