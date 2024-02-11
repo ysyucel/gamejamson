@@ -14,7 +14,7 @@ public class Rumble : MonoBehaviour
     public Vector2 minRumbleAngle = new Vector2(0.1f, 1);
     public Vector2 waitDurations = new Vector2(0.3f, 2f);
 
-    public bool isLinear;
+    public bool isLinear = true;
 
 
 
@@ -23,7 +23,8 @@ public class Rumble : MonoBehaviour
 
     [Header("Linear")]
     float currentX, targetPosX;
-    public Vector2 maxRumblePos, minRumblePos;
+    public Vector2 maxRumblePos = new (0.3f, 0.6f);
+    public Vector2 minRumblePos = new(0.05f, 0.1f);
 
 
 

@@ -8,6 +8,7 @@ public class ObjectThrower : MonoBehaviour
 {
     public Vector2 force = new Vector2(700, 1000);
     public Vector2 waitDuration = new Vector2(.5f, 2);
+    public bool canPushDown = false;
 
     Vector3 direction;
     Rigidbody rb;
@@ -21,11 +22,18 @@ public class ObjectThrower : MonoBehaviour
     {
         direction = Vector3.zero;
 
-        do
+        if(!canPushDown)
         {
+            do
+            {
+                direction = UnityEngine.Random.onUnitSphere;
+            } while (direction.y < 0f);
             direction = UnityEngine.Random.onUnitSphere;
-        } while (direction.y < 0f);
-        direction = UnityEngine.Random.onUnitSphere;
+        }
+        else
+            direction = UnityEngine.Random.onUnitSphere;
+
+
     }
     void Throw()
     {

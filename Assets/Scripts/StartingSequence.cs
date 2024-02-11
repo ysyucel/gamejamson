@@ -12,8 +12,9 @@ public class StartingSequence : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LeanTween.delayedCall(8f,() => {
+        LeanTween.delayedCall(2f,() => {
             CloseStartingMessage();
+            StartEarthQuake();
         });
     }
     public void StartEarthQuake()
