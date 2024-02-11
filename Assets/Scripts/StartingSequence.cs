@@ -8,19 +8,25 @@ public class StartingSequence : MonoBehaviour
     public UIController uiController;
     public GameObject startingMessage;
     public List<GameObject> dustParticle;
+    bool isQuake = false;
     // Start is called before the first frame update
     void Start()
     {
-        LeanTween.delayedCall(3f,() => {
+        LeanTween.delayedCall(8f,() => {
             CloseStartingMessage();
         });
     }
     public void StartEarthQuake()
     {
+        if (isQuake) { return; }
+        isQuake = true;
         Debug.Log("EarthQuake");
         shakeObject.GetComponent<CameraShake>().Shake();
         shakeObject.GetComponent<ShakeSample>().StartEarthQuake();
         foreach(GameObject item in dustParticle) { item.SetActive(true); }
+        LeanTween.delayedCall(8f, () => {
+            uiController.FadeIn();
+        });
     }
     public void CloseStartingMessage()
     {

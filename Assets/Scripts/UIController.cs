@@ -36,6 +36,7 @@ public class UIController : MonoBehaviour
 
     public void FadeIn()
     {
+        Debug.Log("Fade in");
         fadeInCanvas.SetActive(true);
         LeanTween.value(fadePanel.gameObject, SetImageAlpha, fadePanel.color.a, 1, fadeDuration)
                  .setEase(LeanTweenType.easeInOutQuad);
