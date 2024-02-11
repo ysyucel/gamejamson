@@ -6,12 +6,12 @@ public class Rumble : MonoBehaviour
 {
 
     public Ease rumbleEase = Ease.InOutCirc;
-    public float durationMultiplier = 1.02f;
+    public float accelerator = 1.02f;
     public float minRumbleDuration = 0.5f;
     public float rumbleSideDuration = 0.1f;
     public float rumbleSideDecrease = 0.01f;
-    public Vector2 maxRumbleAngle = new Vector2(3, 5);
-    public Vector2 minRumbleAngle = new Vector2(0.1f, 1);
+   //public Vector2 maxRumbleAngle = new Vector2(3, 5);
+    //public Vector2 minRumbleAngle = new Vector2(0.1f, 1);
     //public Vector2 waitDurations = new Vector2(0.3f, 2f);
 
     public bool isLinear;
@@ -19,10 +19,10 @@ public class Rumble : MonoBehaviour
     
 
 
-    float targetAngle, currentAngle, limitAngle;
+    float targetAngle, currentAngle, limitPos;
 
     [Header("Linear")]
-    float currentPos, targetPos;
+    float currentX, targetPosX;
     public Vector2 maxRumblePos, minRumblePos;
 
 
@@ -40,23 +40,26 @@ public class Rumble : MonoBehaviour
         DOTween.Kill("Angle");
         yield return null;
 
-        currentPos = 0;
-        currentPos = transform.position.x;
-        limitAngle = Random.Range(minRumblePos.x, minRumblePos.y);
-        targetPos = limitAngle;
+       // currentPos = 0;
+        currentX = 0;
+        limitPos = Random.Range(minRumblePos.x, minRumblePos.y);
+        targetPosX =  limitPos;
         rumbleSideDuration *= 2;
-
+       
         while (true)
         {
-            yield return DOVirtual.Float(currentPos, targetPos, rumbleSideDuration, UpdatePos).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-            currentPos = targetPos;
-            //targetAngle /= -durationMultiplier;
-            targetPos *= -durationMultiplier;
+            yield return DOVirtual.Float(currentX, targetPosX, rumbleSideDuration, UpdatePos).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
+            currentX = targetPosX;
+            targetPosX *= -accelerator;
+
+           
+            
+
             if (rumbleSideDuration > minRumbleDuration)
                 rumbleSideDuration -= rumbleSideDecrease;
 
 
-            if (Mathf.Abs(targetPos) >= maxRumblePos.y)
+            if (Mathf.Abs(targetPosX) >= maxRumblePos.y + targetPosX)
                 break;
         }
 
@@ -67,19 +70,19 @@ public class Rumble : MonoBehaviour
     {
         DOTween.Kill("Angle");
         yield return null;
-        targetPos = Random.Range(maxRumblePos.x, maxRumblePos.y);
-        if (currentPos < 0)
-            targetPos *= -1;
-        //currentAngle = 0;
-        limitAngle = Random.Range(minRumblePos.x, minRumblePos.y);
+        targetPosX = Random.Range(maxRumblePos.x, maxRumblePos.y);
+        if (currentX < 0)
+            targetPosX *= -1;
+       
+        limitPos = Random.Range(minRumblePos.x, minRumblePos.y);
 
 
 
         while (true)
         {
-            yield return DOVirtual.Float(currentPos, targetPos, rumbleSideDuration, UpdatePos).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
-            currentPos = targetPos;
-            targetPos /= -durationMultiplier;
+            yield return DOVirtual.Float(currentX, targetPosX, rumbleSideDuration, UpdatePos).SetEase(rumbleEase).SetId("Angle").WaitForCompletion();
+            currentX = targetPosX;
+            targetPosX /= -accelerator;
 
 
             //if (Mathf.Abs(targetAngle) <= limitAngle)
@@ -94,26 +97,10 @@ public class Rumble : MonoBehaviour
     void UpdatePos(float pos)
     {
        
-        transform.position = new Vector3(pos, transform.position.y, transform.position.z); // * randomAxis);
-
-       //while(transform.position.x != pos)
-       
-
-       /* while (Mathf.Abs(transform.position.x - pos) > 0.001f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(pos, transform.position.y, transform.position.z), 0.0001f);
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()), 0.0001f);
-
-        }*/
-
-
+        transform.position = new Vector3(transform.position.x + pos, transform.position.y, transform.position.z); // * randomAxis);
         randomAxis = RandomizedAxis();
-      
-       // transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, pos * randomAxis), 0.0001f);
-        
 
-
-       // transform.position = new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()) ;
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + pos * RandomizedAxis()) ;
     }
 
     int RandomizedAxis()
