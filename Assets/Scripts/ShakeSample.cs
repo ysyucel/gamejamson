@@ -6,7 +6,7 @@ public class ShakeSample : MonoBehaviour
     public AnimationCurve shakeCurve;
     public float shakeStrength = 0.1f;
     public float shakeDuration = 0.5f;
-
+    public Vector3 maxShakePosition;
     void Start()
     {
         // Eğriyi kullanarak titreme efektini simüle et
@@ -16,13 +16,13 @@ public class ShakeSample : MonoBehaviour
                  .setOnUpdate((float val) =>
                  {
                      // Hareket değerine rastgele bir titreme uygula
-                     Vector3 shakeAmount = Random.insideUnitSphere * shakeStrength;
+                     Vector3 shakeAmount = maxShakePosition * shakeStrength;
                      objectToShake.transform.position += shakeAmount;
                  })
                  .setOnComplete(() =>
                  {
                      // Titreme tamamlandığında nesneyi başlangıç konumuna getir
-                     objectToShake.transform.localPosition = Vector3.zero;
+                    // objectToShake.transform.localPosition = Vector3.zero;
                  });
     }
 }

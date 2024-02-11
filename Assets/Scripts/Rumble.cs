@@ -41,6 +41,7 @@ public class Rumble : MonoBehaviour
         yield return null;
 
         currentPos = 0;
+        currentPos = transform.position.x;
         limitAngle = Random.Range(minRumblePos.x, minRumblePos.y);
         targetPos = limitAngle;
         rumbleSideDuration *= 2;
@@ -98,12 +99,12 @@ public class Rumble : MonoBehaviour
        //while(transform.position.x != pos)
        
 
-        while (Mathf.Abs(transform.position.x - pos) > 0.001f)
+       /* while (Mathf.Abs(transform.position.x - pos) > 0.001f)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(pos, transform.position.y, transform.position.z), 0.0001f);
             //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()), 0.0001f);
 
-        }
+        }*/
 
 
         randomAxis = RandomizedAxis();
@@ -112,7 +113,7 @@ public class Rumble : MonoBehaviour
         
 
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()) ;
+       // transform.position = new Vector3(transform.position.x, transform.position.y, pos * RandomizedAxis()) ;
     }
 
     int RandomizedAxis()
