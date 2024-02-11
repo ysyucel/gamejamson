@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class StartingSequence : MonoBehaviour
 {
+    public bool isRescueRun = false;
     public GameObject shakeObject;
     public GameObject rumbleObject;
     public UIController uiController;
@@ -24,17 +25,25 @@ public class StartingSequence : MonoBehaviour
         LeanTween.delayedCall(8f,() => {
             CloseStartingMessage();
         });
+
+        if (isRescueRun)
+        {
+            LeanTween.delayedCall(180, () => {
+                StartEarthQuake();
+            });
+        }
     }
     public void StartEarthQuake()
     {
         if (isQuake) { return; }
 
         CloseStartingMessage();
+        if(!isRescueRun)
         coverText.SetActive(true);
         isQuake = true;
         LeanTween.delayedCall(3f, () => {
             SoundPlayer.instance.soundClip = soundClipEarth;
-            SoundPlayer.instance.PlaySound();
+            SoundPlayer.instance.PlaySound(soundClipEarth);
             Debug.Log("EarthQuake");
             shakeObject.GetComponent<CameraShake>().shakeDuration= earthquakeTime;
             shakeObject.GetComponent<ShakeSample>().shakeDuration=earthquakeTime;
@@ -43,13 +52,21 @@ public class StartingSequence : MonoBehaviour
             shakeObject.GetComponent<ShakeSample>().StartEarthQuake();
             foreach(GameObject item in dustParticle) { item.SetActive(true); }
             LeanTween.delayedCall(earthquakeTime+1f, () => {
-                coverText.SetActive(false);
+
+                if (!isRescueRun)
+                    coverText.SetActive(false);
                 rumbleObject.GetComponent<Rumble>().enabled = false;
                 uiController.FadeIn();
-                ChangeStartingMessageToOk();
+
+                if (!isRescueRun)
+                    ChangeStartingMessageToOk();
                 LeanTween.delayedCall(7f, () => {
-                    CloseStartingMessage();
-                    OpenFamilyText();
+
+                    if (!isRescueRun)
+                        CloseStartingMessage();
+
+                    if (!isRescueRun)
+                        OpenFamilyText();
                 });
             });
         });
@@ -88,8 +105,7 @@ public class StartingSequence : MonoBehaviour
     }
     public void LoadIsekai()
     {
-        
-            SceneManager.LoadScene("gameScene");
+            SceneManager.LoadScene("gameSceneDeneme2");
         
     }
 }

@@ -13,11 +13,14 @@ public class ShakeSample : MonoBehaviour
     float totalTime=0f;
     private int xId, yId, zId;
     public float shakeScale = 1f;
+    public float shakeScaleTemp = 1f;
     bool isStart = false;
     void Start()
     {
         startPosition=transform.position; ;
-       
+
+        shakeScaleTemp = shakeScale;
+        shakeScale = 0f;
         Debug.Log(gameObject.name);
     }
     public void Update()
@@ -25,6 +28,10 @@ public class ShakeSample : MonoBehaviour
         if (isStart) { 
             totalTime += Time.deltaTime;
             time += Time.deltaTime;
+            if (shakeScale < shakeScaleTemp)
+            {
+                shakeScale += 0.01f;
+            }
         }
     }
     public void StartEarthQuake()

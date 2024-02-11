@@ -26,8 +26,9 @@ public class SoundPlayer : MonoBehaviour
     }
 
     // Play the sound
-    public void PlaySound()
+    public void PlaySound(AudioClip soundClipTemp)
     {
+        soundClip = soundClipTemp;
         // Check if there's an audio clip assigned
         if (soundClip != null)
         {

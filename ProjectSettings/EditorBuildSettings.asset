@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameSceneDeneme.unity
     guid: bc67958470af17f4ca2157a1310895ce
+  - enabled: 1
+    path: Assets/Scenes/GameSceneDeneme2.unity
+    guid: ec233e8842f365541ac3162964def17b
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

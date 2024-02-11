@@ -6,22 +6,35 @@ public class CameraShake : MonoBehaviour
 {
     // Parameters
     public float shakeMagnitude = 0.1f;
+    public float shakeMagnitudeTemp = 0.1f;
     public float shakeDuration = 0.5f;
 
     // Internal variables
     private Vector3 originalPosition;
 
+    bool isStart = false;
     void Start()
     {
+        shakeMagnitudeTemp = shakeMagnitude;
+        shakeMagnitude = 0f;
         // Store the camera's original position
         originalPosition = transform.localPosition;
         //Shake();
     }
-
+    public void Update()
+    {
+        if (isStart)
+        {
+            if (shakeMagnitude < shakeMagnitudeTemp)
+            {
+                shakeMagnitude += 0.01f;
+            }
+        }
+    }
     public void Shake()
     {
         // Start coroutine to shake the camera
-        StartCoroutine(ShakeCoroutine());
+        StartCoroutine(ShakeCoroutine()); isStart = true;
     }
 
     private IEnumerator ShakeCoroutine()

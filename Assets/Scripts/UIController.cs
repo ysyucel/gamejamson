@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
     }
     
     public void ProceedButtonClicked() {
-        SceneManager.LoadScene("gameScene");
+        SceneManager.LoadScene("gameSceneDeneme");
     }
     public void QuitButtonClicked() {
 #if UNITY_EDITOR
