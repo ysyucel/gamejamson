@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 279369922}
   - component: {fileID: 279369921}
   - component: {fileID: 279369920}
+  - component: {fileID: 279369924}
   m_Layer: 0
   m_Name: Book
   m_TagString: Untagged
@@ -256,6 +257,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279369918}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &279369924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279369918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b86894c2d100641a1cd2a4c5d8db8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
 --- !u!1 &473754191
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +283,7 @@ GameObject:
   - component: {fileID: 473754195}
   - component: {fileID: 473754194}
   - component: {fileID: 473754193}
+  - component: {fileID: 473754197}
   m_Layer: 0
   m_Name: Book (3)
   m_TagString: Untagged
@@ -389,6 +404,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473754191}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &473754197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473754191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b86894c2d100641a1cd2a4c5d8db8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
 --- !u!1 &574079656
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +569,7 @@ GameObject:
   - component: {fileID: 1115991105}
   - component: {fileID: 1115991104}
   - component: {fileID: 1115991103}
+  - component: {fileID: 1115991107}
   m_Layer: 0
   m_Name: Book (2)
   m_TagString: Untagged
@@ -661,6 +690,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115991101}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1115991107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115991101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b86894c2d100641a1cd2a4c5d8db8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
 --- !u!1 &1767114596
 GameObject:
   m_ObjectHideFlags: 0
