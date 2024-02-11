@@ -15,7 +15,12 @@ public class ObjectThrower : MonoBehaviour
 
     private void Awake()
     {
+
         rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = this.gameObject.AddComponent<Rigidbody>();
+        }
         EventBus.OnRumble += Throw;
     }
     public void GetDirection() 
